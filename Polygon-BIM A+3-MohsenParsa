@@ -1,0 +1,83 @@
+## Program Introduction
+print ("*"*50)
+print()
+print ("G E N E R A L    I N F O R M A T I O N")
+information = {"Organisation": "BAM A+","Section":"BIM A+ 3", 
+"Professor": "Dr Matevz Dolenc", "Program":"Polygon", "Author":"Mohsen Parsa"}
+KeyInformation = ["Organisation","Section","Professor","Program","Author","Date"]
+ParamInformation=["BAM A+","BIM A+ 3","Dr Matevz Dolenc","Polygon","Mohsen Parsa","2020/11/25"]
+
+for i in range(len(KeyInformation)):
+    print(KeyInformation[i] +": "+ ParamInformation[i])
+print ()
+print ("*"*50)
+
+   ## Information Requesting 
+print ("Start:")
+print("Enter the number of Edges please:")
+polygonEdgesNumber= int(input())
+
+# getting the information from user
+print ()
+print ("*"*50)
+points=[]
+for i in range(polygonEdgesNumber):
+    nu = i+1
+    print("Please enter the coordination of Point Number " +str(nu))
+    x= float(input(" X:"))
+    y= float(input(" Y:"))
+    points.append([x,y])
+
+
+ # Printing the points coordination
+print ()
+print ("*"*50)
+print("Coordination of the Polygon is:")
+c=1
+for p in points:
+    print (f"Point Number {c} : {p}")
+    c+=1
+
+
+#Calculating the formula
+AX=Sx=Sy=Ix=Iy=Ixy=0
+AxSigma=SxSigma=SySigma=IxSigma =IySigma=IxySigma= 0
+
+for i in range(polygonEdgesNumber-1):
+     
+    AxSigma += (points[i+1][0] + points[i][0])*(points[i+1][1] - points[i][1])
+    SxSigma += (points[i+1][0]-points[i][0]) * (points[i+1][1]**2 + points[i+1][1]*points[i][1] + points[i][1]**2)
+    SySigma += (points[i+1][1] - points[i][1]) * (points[i+1][0]**2 + points[i][0]*points[i+1][0] + points[i][0]**2)
+    IxSigma += (points[i+1][0] - points[i][0]) * (points[i+1][1]**3 + points[i+1][1]**2 * points[i][1] + points[i+1][1] * points[i][1]**2 + points[i][1]**3)
+    IySigma += (points[i+1][1] - points[i][1]) * (points[i+1][0]**3 + points[i+1][0]**2 * points[i][0] + points[i+1][0] * points[i][0]**2 + points[i][0]**3)
+    IxySigma += (points[i+1][1] - points[i][1]) * (points[i+1][1]*(3*points[i+1][0]**2 + 2*points[i+1][0]*points[i][0]+points[i][0]**2) + points[i][1]*(3*points[i][0]**2 + 2*points[i+1][0]*points[i][0] + points[i+1][0]**2))
+
+
+
+AX = AxSigma/2
+Sx = SxSigma/-6
+Sy = SySigma/6
+Ix = IxSigma/-12
+Iy = IySigma/12
+Ixy = IxySigma/-24
+Xt = Sy/AX
+Yt = Sx/AX
+Ixt = Ix - Yt**2 * AX
+Iyt = Iy - Xt**2 * AX
+Ixyt = Ixy + Xt*Yt*AX
+# Printing thr results
+print ()
+print ("*"*50)
+print (f"Ax = {AX:10.2f}")
+print (f"Sx = {Sx:10.2f}")
+print (f"Sy = {Sy:10.2f}")
+print (f"Ix = {Ix:10.2f}")
+print (f"Iy = {Iy:10.2f}")
+print (f"Ixy = {Ixy:10.2f}")
+print (f"Xt = {Xt:10.2f}")
+print (f"Yt = {Yt:10.2f}")
+print (f"Ixt = {Ixt:10.2f}")
+print (f"Iyt = {Iyt:10.2f}")
+print (f"Ixyt = {Ixyt:10.2f}")
+
+
